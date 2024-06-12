@@ -1,0 +1,28 @@
+version: '1.0'
+services:
+    postgres-app:
+        image: postgres:15-alpine
+        networks:
+            - database
+        environment:
+            POSTGRES_USER: '${POSTGRES_USER:-postgres}'
+            POSTGRES_PASSWORD: '${POSTGRES_PASSWORD:-postgres}'
+            POSTGRES_DB: '${POSTGRES_DB:-test_devops}'
+        ports:
+            - '5432:5432/tcp'
+    test-app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        networks:
+            - database
+        ports:
+            - '3000:3000/tcp'
+        environment:
+            POSTGRES_USER: '${POSTGRES_USER:-postgres}'
+            POSTGRES_PASSWORD: '${POSTGRES_PASSWORD:-postgres}'
+            POSTGRES_HOST: 'postgres-app'
+            POSTGRES_PORT: '${POSTGRES_PORT:-5432}'
+            POSTGRES_DB: '${POSTGRES_DB:-test_devops}'
+networks:
+    database:
