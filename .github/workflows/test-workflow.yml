@@ -6,7 +6,7 @@ on:
                 type: string
                 required: true
                 description: 'test access secrets'
-                default: ${{ secrets.TEST_DEVOPS_SECRET }}
+                default: ${{ github.env.TEST_DEVOPS_SECRET }}
 # env:
 #     USERNAME: m-rakic-vegait
 #     IMAGE_NAME: test-devops-app
