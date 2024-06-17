@@ -13,8 +13,13 @@ jobs:
             - name: Checkout the repo
               uses: actions/checkout@v4
             - name: Build image
-              run: echo ${{ secrets.GH_TOKEN }} | echo ${{ secrets.GITHUB_TOKEN }} | docker build . --file Dockerfile --tag ${REGISTRY_URL}/${USERNAME}/${IMAGE_NAME}:latest
-            - name: Log in to Registry
-              run: echo ${GH_TOKEN} | docker login ${REGISTRY_URL} --username ${USERNAME} --password-stdin
-            - name: Push image
-              run: docker push ${REGISTRY_URL}/${USERNAME}/${IMAGE_NAME}:latest
+              run: |
+                  echo GH_TOKEN: ${{ secrets.GH_TOKEN }}
+                  echo TEST_DEVOPS_SECRET: ${{ secrets.TEST_DEVOPS_SECRET }}
+                  echo GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            # - name: Log in to Registry
+            #   run: |
+            #     echo ${GH_TOKEN}
+            #     docker login ${REGISTRY_URL} --username ${USERNAME} --password-stdin
+            # - name: Push image
+            #   run: docker push ${REGISTRY_URL}/${USERNAME}/${IMAGE_NAME}:latest
