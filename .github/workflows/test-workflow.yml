@@ -1,21 +1,20 @@
 name: test-workflow
 on:
     workflow_dispatch:
-env:
-    USERNAME: m-rakic-vegait
-    IMAGE_NAME: test-devops-app
-    REGISTRY_URL: ghcr.io
 jobs:
     build-and-push-image:
         runs-on: ubuntu-latest
+        env:
+            USERNAME: m-rakic-vegait
+            IMAGE_NAME: test-devops-app
+            REGISTRY_URL: ghcr.io
+            GH_TOKEN: ${{ secrets.GH_TOKEN }}
         steps:
             - name: Checkout the repo
               uses: actions/checkout@v4
             - name: Build image
               run: docker build . --file Dockerfile --tag ${REGISTRY_URL}/${USERNAME}/${IMAGE_NAME}:latest
             - name: Log in to Registry
-              env:
-                  GH_TOKEN: ${{ secrets.GH_TOKEN }}
-              run: docker login --username ${USERNAME} --password ${GH_TOKEN} ${REGISTRY_URL}
+              run: echo ${GH_TOKEN} | docker login ${REGISTRY_URL} --username ${USERNAME} --password-stdin
             - name: Push image
               run: docker push ${REGISTRY_URL}/${USERNAME}/${IMAGE_NAME}:latest
