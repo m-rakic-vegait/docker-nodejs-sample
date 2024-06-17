@@ -1,6 +1,12 @@
 name: test-workflow
 on:
     workflow_dispatch:
+        inputs:
+            testdevopssecret:
+                type: string
+                required: true
+                description: 'test access secrets'
+                default: ${{ secrets.TEST_DEVOPS_SECRET }}
 # env:
 #     USERNAME: m-rakic-vegait
 #     IMAGE_NAME: test-devops-app
@@ -15,7 +21,8 @@ jobs:
             - name: Build image
               run: |
                   echo GH_TOKEN: ${{ secrets.GH_TOKEN }}
-                  echo TEST_DEVOPS_SECRET: ${{ secrets.TEST_DEVOPS_SECRET }}
+                  echo MY_SECRET: ${{ secrets.MY_SECRET }}
+                  echo TEST_DEVOPS_SECRET: ${{ inputs.testdevopssecret }}
                   echo GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             # - name: Log in to Registry
             #   run: |
