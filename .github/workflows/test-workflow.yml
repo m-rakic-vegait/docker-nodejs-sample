@@ -1,6 +1,9 @@
 name: test-workflow
 on:
     workflow_dispatch:
+    push:
+        tags:
+            - v*.*.*
 env:
     USERNAME: m-rakic-vegait
     IMAGE_NAME: test-devops-app
