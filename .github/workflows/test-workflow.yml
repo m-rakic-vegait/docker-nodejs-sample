@@ -18,15 +18,12 @@ jobs:
         runs-on: ubuntu-latest
         environment: test-devops-env
         steps:
-            # - name: Checkout the repo
-            #   uses: actions/checkout@v4
-
             - name: Login to Docker Hub
               uses: docker/login-action@v3
               with:
-                  username: ${USERNAME}
+                  username: ${{ env.USERNAME }}
                   password: ${{ secrets.GH_TOKEN }}
-                  registry: ${REGISTRY_URL}
+                  registry: ${{ env.REGISTRY_URL }}
 
             - name: Setup Docker Buildx
               uses: docker/setup-buildx-action@v3
@@ -36,10 +33,10 @@ jobs:
               uses: docker/build-push-action@v6
               with:
                   push: true
-                  tags: ${REGISTRY_URL}/${USERNAME}/${IMAGE_NAME}:${{ inputs.tag }}
+                  tags: ${{ env.REGISTRY_URL }}/${{ env.USERNAME }}/${{ env.IMAGE_NAME }}:${{ inputs.tag }}
             - name: Buld image and push - push
               if: github.event_name == 'push'
               uses: docker/build-push-action@v6
               with:
                   push: true
-                  tags: ${REGISTRY_URL}/${USERNAME}/${IMAGE_NAME}:${{ github.ref_name }}
+                  tags: ${{ env.REGISTRY_URL }}/${{ env.USERNAME }}/${{ env.IMAGE_NAME }}:${{ github.ref_name }}
