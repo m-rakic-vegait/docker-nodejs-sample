@@ -19,6 +19,13 @@ jobs:
         runs-on: ubuntu-latest
         environment: test-devops-env
         steps:
+            - name: Test
+              run: |
+                  echo "workflow_dispatch - tag: ${{ inputs.tag }}"
+                  echo "workflow_dispatch - username: ${{ env.USERNAME }}"
+                  echo "workflow_dispatch - event_name 1: ${github.event_name}"
+                  echo "workflow_dispatch - event_name 2: ${{ github.event_name }}"
+
             - name: Login to Docker Hub
               uses: docker/login-action@v3
               with:
