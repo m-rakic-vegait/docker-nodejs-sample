@@ -32,7 +32,7 @@ jobs:
             - name: Set tag
               id: tag-selector
               run: |
-                  if [ ${{ github.ref_type }} == "tag" ]; then
+                  if [ ${{ github.ref_type == "tag" }} ]; then
                     echo "tag=${{ github.ref_name }}" >> "$GITHUB_OUTPUT"
                   else
                     echo "tag=${{ inputs.tag }}" >> "$GITHUB_OUTPUT"
