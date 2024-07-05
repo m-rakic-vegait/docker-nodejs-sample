@@ -12,7 +12,6 @@ services:
             - '5432:5432/tcp'
     test-app:
         build:
-            context: .
             dockerfile: Dockerfile
         networks:
             - database
