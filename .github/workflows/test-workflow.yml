@@ -23,8 +23,10 @@ jobs:
               run: |
                   echo "workflow_dispatch - tag: ${{ inputs.tag }}"
                   echo "workflow_dispatch - username: ${{ env.USERNAME }}"
-                  echo "workflow_dispatch - event_name 1: ${github.event_name}"
-                  echo "workflow_dispatch - event_name 2: ${{ github.event_name }}"
+                  echo "workflow_dispatch - event_name: ${{ github.event_name }}"
+                  echo "github.event_name == 'workflow_dispatch': ${{ github.event_name == 'workflow_dispatch' }}"
+                  echo "regex: ${{ inputs.tag =~ /^v[0-9]+\.[0-9]+\.[0-9]+$/) }}"
+                  echo "${{ github.event_name == 'push' }}"
 
             - name: Login to Docker Hub
               uses: docker/login-action@v3
