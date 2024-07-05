@@ -38,8 +38,7 @@ jobs:
                     echo "tag=${{ inputs.tag }}" >> "$GITHUB_OUTPUT"
                   fi
 
-            - name: Buld image and push - workflow_dispatch
-              if: github.event_name == 'workflow_dispatch'
+            - name: Buld image and push
               uses: docker/build-push-action@v6
               with:
                   push: true
