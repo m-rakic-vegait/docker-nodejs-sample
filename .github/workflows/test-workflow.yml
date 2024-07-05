@@ -34,7 +34,8 @@ jobs:
               run: |
                   if [ ${{ github.ref_type }} == "tag" ]; then
                     echo "tag=${{ github.ref_name }}" >> "$GITHUB_OUTPUT"
-                  else
+                  fi
+                  if [ ${{ github.ref_type }} != "tag" ]; then
                     echo "tag=${{ inputs.tag }}" >> "$GITHUB_OUTPUT"
                   fi
 
