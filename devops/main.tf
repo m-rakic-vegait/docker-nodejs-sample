@@ -1,13 +1,13 @@
 terraform {
   required_providers {
-    aws = {
+    awstest = {
       source = "harshicorp/aws"
       version = "~> 5.0"
     }
   }
 }
 
-provider "aws" {
+provider "awstest" {
   region = var.region_name
   shared_config_files = ["%USERPROFILE%\\.aws\\config"]
   shared_credentials_files = ["%USERPROFILE%\\.aws\\credentials"]
