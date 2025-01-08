@@ -1,15 +1,19 @@
 terraform {
   required_providers {
     awstest = {
-      source = "harshicorp/aws"
+      source  = "harshicorp/aws"
       version = "~> 5.0"
     }
   }
+
+  required_version = ">= 1.9.0"
 }
 
 provider "awstest" {
-  region = var.region_name
-  shared_config_files = ["%USERPROFILE%\\.aws\\config"]
-  shared_credentials_files = ["%USERPROFILE%\\.aws\\credentials"]
+  region  = var.region_name
   profile = var.profile_name
+}
+
+resource "aws_instance" "example" {
+  # config
 }
