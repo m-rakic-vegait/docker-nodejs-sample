@@ -10,8 +10,7 @@ terraform {
 }
 
 provider "awstest" {
-  region  = var.region_name
-  profile = var.profile_name
+  region = var.region_name
 }
 
 resource "aws_instance" "example" {
